@@ -3,7 +3,7 @@
 # 更新时间：2025年03月16日
 
 # 参数检查
-if [ $# -ne 1 ]; then
+if [ $# -ne 3 ]; then
     echo "使用方法: $0 <gitToken> <二级域名> <主域名>"
     exit 1
 fi
