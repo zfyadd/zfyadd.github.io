@@ -4,10 +4,12 @@
 
 # 参数检查
 if [ $# -ne 1 ]; then
-    echo "使用方法: $0 <gitToken>"
+    echo "使用方法: $0 <gitToken> <二级域名> <主域名>"
     exit 1
 fi
 GIT_TOKEN=$1
+SUB_DOMAIN=$2
+MAIN_DOMAIN=$3
 REPO_URL="https://${GIT_TOKEN}@github.com/zfyadd/client_trojan.git"
 TARGET_DIR="./client_trojan"
 
@@ -48,7 +50,7 @@ if [ -d "$TARGET_DIR" ]; then
         echo -e "${RED}✗ 代码更新失败，请手动解决冲突${NC}"
         exit 1
     fi
-    sudo sh deploy.sh
+    sudo sh deploy.sh ${SUB_DOMAIN} ${MAIN_DOMAIN}
     cd - > /dev/null
 else
     echo -e "${GREEN}▶ 开始克隆仓库到: $TARGET_DIR${NC}"
@@ -61,7 +63,7 @@ else
         exit 1
     fi
     cd "$TARGET_DIR"
-    sudo sh deploy.sh
+    sudo sh deploy.sh ${SUB_DOMAIN} ${MAIN_DOMAIN}
 fi
 
 # 5. 后置验证
